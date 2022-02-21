@@ -1,47 +1,59 @@
 package Wargames;
 
+import javax.xml.stream.Location;
+import java.lang.reflect.Field;
+import java.util.List;
+
 /**
  * A class representing the shared attributes of a unit.
  */
-public class Unit {
+public abstract class Unit {
 
     private String name;
     private int health;
     private int attack;
     private int armor;
+    private int defendCounter;
+    private int attackCounter;
 
-    public Unit(String name, int health, int attack, int armor) {
+
+    protected Unit(String name, int health, int attack, int armor) {
         this.name = name;
-        if (health >= 0) {
-
-        } else {
-            this.health = health;
-        }
+        this.health = health;
         this.attack = attack;
         this.armor = armor;
+
     }
 
-    public void attackOpponent() {
+    protected void attackOpponent() {
         health = health - (attack + getAttackBonus()) + (armor + getResistBonus());
     }
 
-    public String getName() {
+    public int getDefendCounter() {
+        return defendCounter;
+    }
+
+    public int getAttackCounter() {
+        return attackCounter;
+    }
+
+    protected String getName() {
         return this.name ;
     }
 
-    public int getHealth() {
+    protected int getHealth() {
         return this.health;
     }
 
-    public int getAttack() {
+    protected int getAttack() {
         return this.attack;
     }
 
-    public int getArmor() {
+    protected int getArmor() {
         return this.armor;
     }
 
-    public void setHealth() {
+    protected void setHealth() {
         this.health = health;
     }
 
@@ -55,14 +67,8 @@ public class Unit {
                 '}';
     }
 
-    public int getAttackBonus() {
-        return this.getAttackBonus();
-    }
-
-    public int getResistBonus() {
-        return this.getResistBonus();
-
-    }
+    abstract public int getAttackBonus();
 
 
+    abstract public int getResistBonus();
 }
