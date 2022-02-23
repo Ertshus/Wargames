@@ -10,9 +10,11 @@ public class CavalryUnit extends Unit{
     private int resistBonus;
 
     public CavalryUnit(String name, int health, int attack, int armor) {
+        super(name, health, attack, armor);
+    }
+
+    public CavalryUnit(String name, int health) {
         super(name, health, 20, 12);
-        this.attackBonus = attackBonus;
-        this.resistBonus = 1;
     }
 
 
@@ -21,14 +23,15 @@ public class CavalryUnit extends Unit{
         int attackBonus = 2;
         int attackCounter = 0;
         if (attackCounter == 0){
-            attackBonus = 6;
+            attackBonus = 4 + attackBonus;
         }
+        attackCounter++;
         return attackBonus;
     }
 
     @Override
     public int getResistBonus() {
-        return resistBonus;
+        return 1;
     }
 }
 
