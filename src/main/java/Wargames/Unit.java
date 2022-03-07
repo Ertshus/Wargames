@@ -16,8 +16,8 @@ public abstract class Unit {
     private int health;
     private int attack;
     private int armor;
-    private int defendCounter;
-    private int attackCounter;
+     int defendCounter;
+     int attackCounter;
 
     /**
      * Create a new unit with:
@@ -28,23 +28,32 @@ public abstract class Unit {
      */
 
     protected Unit(String name, int health, int attack, int armor) {
-        this.name = name;
-        this.health = health;
+
+        if (name.isBlank()) {throw new IllegalArgumentException("Name cannot be blank.");
+        } else {
+            this.name = name;
+        }
+        if (health <= 0) { throw new IllegalArgumentException("Health can never be lower than 0");
+        } else {
+            this.health = health;
+        }
         this.attack = attack;
         this.armor = armor;
 
     }
 
     /**
-     * how the health of an opponent
-     * is affected when an attack happens
+     * How the health of an opponent is
+     * affected when an attack happens.
      */
-    protected void attackOpponent() {
+    protected void attackOpponent(Unit opponentUnit) {
         this.health = this.health - (attack + getAttackBonus()) + (armor + getResistBonus());
+        opponentUnit.defendCounter++;
+        opponentUnit.attackCounter++;
     }
 
     /**
-     * returns how many times it's defended.
+     * Returns how many times it's defended.
      * @return amount of times defended.
      */
     public int getDefendCounter() {
@@ -52,7 +61,7 @@ public abstract class Unit {
     }
 
     /**
-     * returns how many times attacked.
+     * Returns how many times attacked.
      * @return how many times attacked.
      */
     public int getAttackCounter() {
@@ -60,7 +69,7 @@ public abstract class Unit {
     }
 
     /**
-     * returns name of unit.
+     * Returns name of unit.
      * @return name of unit.
      */
     protected String getName() {
@@ -68,7 +77,7 @@ public abstract class Unit {
     }
 
     /**
-     * returns health
+     * Returns health.
      * @return health
      */
     protected int getHealth() {
@@ -76,7 +85,7 @@ public abstract class Unit {
     }
 
     /**
-     * returns attack
+     * Returns attack.
      * @return attack
      */
     protected int getAttack() {
@@ -84,7 +93,7 @@ public abstract class Unit {
     }
 
     /**
-     * returns armor of unit.
+     * Returns armor of unit.
      * @return armor of unit.
      */
     protected int getArmor() {
@@ -100,7 +109,7 @@ public abstract class Unit {
     }
 
     /**
-     * returns toString
+     * Returns toString.
      * @return toString
      */
     @Override
@@ -114,15 +123,15 @@ public abstract class Unit {
     }
 
     /**
-     * returns the attack bonus of unit
-     * helps on certain attacks
+     * Returns the attack bonus of unit
+     * helps on certain attacks.
      * @return attack bonus of unit.
      */
     abstract public int getAttackBonus();
 
 
     /**
-     * returns the resit bonus
+     * Returns the resist bonus.
      * helps on health
      * @return resist bonus
      */

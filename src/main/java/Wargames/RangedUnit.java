@@ -8,8 +8,9 @@ import java.util.List;
  */
 public class RangedUnit extends Unit{
 
-    private int attackBonus;
-    private int resistBonus;
+    int resistBonus;
+
+
 
     /**
      * Representing a ranged unit.
@@ -33,8 +34,7 @@ public class RangedUnit extends Unit{
         }
 
     /**
-     * returns the attack bonus which stays consistent
-     * at 3
+     * Returns the attack bonus which stays consistent at 3.
      * @return attack bonus
      */
         @Override
@@ -43,22 +43,21 @@ public class RangedUnit extends Unit{
     }
 
     /**
-     * returns the resist bonus
+     * Returns the resist bonus.
      * which in this case changes
      * depending on the amount of attacks
      * @return resist bonus
      */
     @Override
     public int getResistBonus() {
-        int resistBonus = 2;
-        int defendCounter = 0;
-        if (defendCounter == 0) {
+
+        if(defendCounter == 1){
             resistBonus = 6;
-        }
-        if (defendCounter == 1) {
+        } else if(defendCounter == 2) {
             resistBonus = 4;
+        } else if(defendCounter >= 3) {
+            resistBonus = 2;
         }
-        defendCounter++;
         return resistBonus;
     }
 
