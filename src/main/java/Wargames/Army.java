@@ -1,8 +1,10 @@
 package Wargames;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * Represents  an army which can attack other units.
@@ -106,6 +108,38 @@ public class Army {
                 "name='" + name + '\'' +
                 ", units=" + units +
                 '}';
+    }
+
+    /**
+     * Returns the instances of the type infantry unit.
+     * @return instance of the type infantry unit.
+     */
+    public List<Unit> getInfantryUnits() {
+        return units.stream().filter(I -> I instanceof InfantryUnit).collect(Collectors.toList());
+    }
+
+    /**
+     * Returns the instances of the type cavalry unit.
+     * @return instance of the type cavalry unit.
+     */
+    public List<Unit> getCavalryUnits() {
+        return units.stream().filter(C -> C instanceof CavalryUnit).collect(Collectors.toList());
+    }
+
+    /**
+     * Returns the instances of the type ranged unit.
+     * @return instance of the type ranged unit.
+     */
+    public List<Unit> getRangedUnits() {
+        return units.stream().filter(R -> R instanceof RangedUnit).collect(Collectors.toList());
+    }
+
+    /**
+     * Returns the instances of the type commander unit.
+     * @return instance of the type commander unit.
+     */
+    public List<Unit> getCommanderUnits() {
+        return units.stream().filter(C -> C instanceof CommanderUnit).collect(Collectors.toList());
     }
 
     /**
